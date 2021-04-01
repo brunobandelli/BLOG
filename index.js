@@ -16,8 +16,7 @@ app.use(bodyParser.json());                                             //PARA B
 
 
 //DATABASE 
-//PROMISSE
-connection                                                              //OBJETO DE CONEXÃO
+connection                                                              //OBJETO DE CONEXÃO (USANDO PROMISSE)
     .authenticate()                                                     //AUTENCAÇÃO DO BANCO DE DADOS
     .then(() =>{                                                        //TENDO SUCESSO
         console.log("Conexão feita com sucesso!");                      //IRÁ APARECER: Conexão feita com sucesso!
