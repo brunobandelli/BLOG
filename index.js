@@ -4,7 +4,7 @@ const bodyParser = require("body-parser")                               //BIBLIO
 const connection = require("./database/database")                       //IRÁ CARREGAR/IMPORTAR O ARQUIVO DATABASE DENTRO DA PASTA DATABASE
 
 //View engine
-app.set('view engine', 'ejs');                                          //VIEW ENGINE: EJS
+app.set('view engine','ejs');                                          //VIEW ENGINE: EJS
 
 // Static
 app.use(express.static('public'));                                      //IRA LER/CARREGAR OS ARQUIVOS ESTÁTICOS DENTRO DA PASTA public
