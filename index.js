@@ -1,7 +1,8 @@
-const express = require("express");                                     //MODULO EXPRESS
-const app = express();                                                  //ESTANCIA DO EXPRESS
-const bodyParser = require("body-parser")                               //BIBLIOTECA DE FORMULARIO BODYPARSER PARA O EXPRESS
-const connection = require("./database/database")                       //IRÁ CARREGAR/IMPORTAR O ARQUIVO DATABASE DENTRO DA PASTA DATABASE
+const express = require("express");                                         //MODULO EXPRESS
+const app = express();                                                      //ESTANCIA DO EXPRESS
+const bodyParser = require("body-parser")                                   //BIBLIOTECA DE FORMULARIO BODYPARSER PARA O EXPRESS
+const connection = require("./database/database")                           //IRÁ CARREGAR/IMPORTAR O ARQUIVO DATABASE DENTRO DA PASTA DATABASE
+const categoriesController = require("./categories/CategoriesController")   //IMPORTANDO O CategoriesController.js
 
 //View engine
 app.set('view engine','ejs');                                          //VIEW ENGINE: EJS
@@ -23,6 +24,8 @@ connection                                                              //OBJETO
     }).catch((error) => {                                               //TENDO FALHA
         console.log("error");                                           //IRÁ APARECER: error
     })
+
+app.use("/",categoriesController);
 
 app.get("/", (req, res) => {                                            //ROTA PRINCIPAL
     res.render("index");                                                //RENDERIZANDO A VIEW ("index.ejs")
