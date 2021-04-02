@@ -19,5 +19,5 @@ const Article = connection.define('articles',{                      // TABELA: A
 Category.hasMany(Article);                                          // UM ARTIGO PERTENCE A UMA CATEGORIA.
 Article.belongsTo(Category);                                        // UMA CATEGORIA TEM MUITOS ARTIGOS.
 
-Article.sync({force: true}); 
+
 module.exports = Article;                                           // EXPORTAÇÃO DO MODULE
