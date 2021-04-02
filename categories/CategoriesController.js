@@ -1,12 +1,8 @@
 const express = require("express");                             //EXPRESS
 const router = express.Router();                                //ROUTER
 
-router.get("/categories",(req, res) => {                        //ROTA: /categories
-    res.send("ROTA DE CATEGORIAS")
-});
-
 router.get("/admin/categories/new", (req, res) => {             //ROTA: /admin/categories/new
-    res.send("ROTA PARA CRIAR UMA NOVA CATEGORIA!")
+    res.render("./admin/categories/new")                        //RENDERIZAÇÃO DO ARQ.(new.ejs) DA PASTA views/admin/categories
 })
 
 module.exports = router;                                        //EXPORTAÇÃO
