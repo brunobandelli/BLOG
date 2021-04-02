@@ -3,6 +3,7 @@ const app = express();                                                      //ES
 const bodyParser = require("body-parser")                                   //BIBLIOTECA DE FORMULARIO BODYPARSER PARA O EXPRESS
 const connection = require("./database/database")                           //IRÁ CARREGAR/IMPORTAR O ARQUIVO DATABASE DENTRO DA PASTA DATABASE
 const categoriesController = require("./categories/CategoriesController")   //IMPORTANDO O CategoriesController.js
+const articlesController = require("./articles/ArticlesController");        //IMPORTANDO O ArticlesController.js
 
 //View engine
 app.set('view engine','ejs');                                          //VIEW ENGINE: EJS
@@ -25,7 +26,8 @@ connection                                                              //OBJETO
         console.log("error");                                           //IRÁ APARECER: error
     })
 
-app.use("/",categoriesController);
+app.use("/",categoriesController);                                      //ROTAS DO ARQUIVO ( CategoriesController.js )	
+app.use("/",articlesController);                                        //ROTAS DO ARQUIVO ( ArticlesController.js )	
 
 app.get("/", (req, res) => {                                            //ROTA PRINCIPAL
     res.render("index");                                                //RENDERIZANDO A VIEW ("index.ejs")
