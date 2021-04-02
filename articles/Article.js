@@ -1,5 +1,6 @@
-const Sequelize = require("sequelize");
-const connection = require("../database/database");
+const Sequelize = require("sequelize");                             //BIBLIOTECA SEQUELIZE
+const connection = require("../database/database");                 //CONEXÃO COM O BANCO DE DADOS
+const Category = require("../categories/Category");                 //IMPORTANDO O MODEL Category.js
 
 const Article = connection.define('articles',{                      // TABELA: ARTICLES
     title:{                                                         // COLUNA: TITLE
@@ -15,4 +16,8 @@ const Article = connection.define('articles',{                      // TABELA: A
     }
 })
 
+Category.hasMany(Article);                                          // UM ARTIGO PERTENCE A UMA CATEGORIA.
+Article.belongsTo(Category);                                        // UMA CATEGORIA TEM MUITOS ARTIGOS.
+
+Article.sync({force: true}); 
 module.exports = Article;                                           // EXPORTAÇÃO DO MODULE

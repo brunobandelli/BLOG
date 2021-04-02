@@ -4,6 +4,8 @@ const bodyParser = require("body-parser")                                   //BI
 const connection = require("./database/database")                           //IRÁ CARREGAR/IMPORTAR O ARQUIVO DATABASE DENTRO DA PASTA DATABASE
 const categoriesController = require("./categories/CategoriesController")   //IMPORTANDO O CategoriesController.js
 const articlesController = require("./articles/ArticlesController");        //IMPORTANDO O ArticlesController.js
+const Article = require("./articles/Article");                              //IMPORTANDO O Article.js
+const Category = require("./articles/Category");                            //IMPOTANDO O Category.js
 
 //View engine
 app.set('view engine','ejs');                                          //VIEW ENGINE: EJS

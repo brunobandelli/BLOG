@@ -11,4 +11,5 @@ const Category = connection.define('categories',{                   //TABELA: CA
     }
 })
 
+Category.sync({force: true});
 module.exports = Category;                                          //EXPORTAÇÃO DO MODULE
