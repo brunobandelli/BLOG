@@ -5,6 +5,7 @@
 <div class="container">
     <hr>   
     <h2>Categorias</h2>
+    <a class="btn btn-success" href="/admin/categories/new">Criar Nova Categoria </a>
     <hr>
     <table class="table table-bordered">                <!--table - TABELA // class="table table-bordered" - FAZ AS BORDAS DA TABELA NO ESTILO BOOTSTRAP-->
         <thead>                                         <!--thead - CABEÇALHO DA TABELA-->
@@ -21,7 +22,11 @@
                     <th><%= category.id %></th>         <!--EXIBI O id DE CADA VARIAVEL category DENTRO DO forEach-->
                     <th><%= category.title %></th>      <!--EXIBI O title DE CADA VARIAVEL category DENTRO DO forEach-->
                     <th><%= category.slug %></th>       <!--EXIBI O slug DE CADA VARIAVEL category DENTRO DO forEach-->
-                    <th></th>
+                    <th>
+                        <button class="btn btn-warning">Editar</button>     <!--BOTÃO DE EDITAR-->
+
+                        <button class="btn btn-danger">Deletar</button>     <!--BOTÃO DE DELETAR-->
+                    </th>
                 </tr>
                 <% }) %>
         </tbody>
