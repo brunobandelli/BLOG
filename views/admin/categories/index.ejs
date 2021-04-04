@@ -16,12 +16,14 @@
             </tr>
         </thead>
         <tbody>                                         <!--tbody - CORPO DA TABELA, ONDE FICARÃO OS DADOS-->
-            <tr>
-                <th>1</th>
-                <th>Dev Web</th>
-                <th>dev-web</th>
-                <th></th>
-            </tr>
+              <% categories.forEach(category =>{ %>     <!--TRANSFERE OS DADOS DA VARIAVEL categoies PARA CADA VARIAVEL category DENTRO DO forEach()-->
+                <tr>
+                    <th><%= category.id %></th>         <!--EXIBI O id DE CADA VARIAVEL category DENTRO DO forEach-->
+                    <th><%= category.title %></th>      <!--EXIBI O title DE CADA VARIAVEL category DENTRO DO forEach-->
+                    <th><%= category.slug %></th>       <!--EXIBI O slug DE CADA VARIAVEL category DENTRO DO forEach-->
+                    <th></th>
+                </tr>
+                <% }) %>
         </tbody>
     </table>
 </div>

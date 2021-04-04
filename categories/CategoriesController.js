@@ -24,8 +24,12 @@ router.post("/categories/save", (req, res) =>{                  //ROTA: /categor
     }
 })
 
-router.get("/admin/categories", (req,res) =>{
-    res.render("admin/categories/index")
+router.get("/admin/categories", (req,res) =>{                   //ROTA: /admin/categories
+    Category.findAll().then(categories =>{                      //ACHAR TODOS OS DADOS DO BANCO DE DADOS NO MODEL Category.js E PASSAR ESSAS INFORMAÇÕES PARA A VARIAVEL categories DENTRO DE THEN
+        res.render("admin/categories/index",{                   //RENDERIZA A PAGINA index.ejs DA PASTA views/admin/categories
+            categories: categories                              //PASSA OS DADOS DA categories PARA VARIAVEL cacetories, ESSA VARIAVEL POR SUA VÊZ VAI APARECER NA NOSSA VIEW (index.ejs)
+        })
+    })
 })
 
 module.exports = router;                                        //EXPORTAÇÃO
