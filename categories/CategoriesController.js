@@ -32,4 +32,23 @@ router.get("/admin/categories", (req,res) =>{                   //ROTA: /admin/c
     })
 })
 
+router.post("/categories/delete", (req, res) =>{                    //ROTA:/categories/delete TIPO POST
+    var id = req.body.id;                                           //ESSE É A VARIAVEL QUE IRÁ RECEBER AS INFORMÇÕES DA ID DO FRONTEND PELO FORMULÁRIO //AQUI EU VOU RECEBER O id PELO FORMULARIO DO FRONTEND NA TAG <input name="id" ...> DO ARQ. index.ejs DA PASTA categories
+    if(id != undefined){                                            //VERIFICAÇÃO DE ID SE É VALIDO (SE É DIFERENTE DE UNDEFINED)
+        if(!isNaN(id)){                                             //VERIFICAÇÃO SE O ID É UM NUMERO (SE É DIFERENTE DE UM NÃO NUMERO)
+            Category.destroy({                                      //MODEL: Category // .destroy() : COMANDO DO SEQUELIZE PARA DELETAR.
+                where: {                                            //ONDE (ESPECIFICAÇÃO DA LÓGICA)
+                    id: id                                          //A id RECEBE O VALOR DA VARIAVEL id QUE CONTEM NO BANCO DE DADOS // OU SEJÁ SEGUINDO A LOGICA DO WHERE: ONDE DELETARÁ A CATEGORIA DO ID RECEBIDO NA VARIAVEL ID
+                }                                                   //OU SEJÁ, EU VOU DESTRUIR UMA CATEGORIA NO QUAL MINHA VARIAL id RECEBER O VALOR DA VARIAVEL id DO BANCO DE DADOS
+            }).then(() =>{                                          //SE DER CERTO
+                res.redirect("/admin/categories");                  //VOU REDIRECIONAR PARA: /admin/categories
+            });            
+        }else{ // NÃO FOR NÚMERO                                    //SE NÃO FOR NUMÉRICO
+            res.redirect("/admin/categories");                      //VOU REDIRECIONAR PARA: /admin/categories
+        }
+    }else{  // NULL                                                 //SE FOR NULO
+        res.redirect("/admin/categories");                          //VOU REDIRECIONAR PARA: /admin/categories
+    }
+})
+
 module.exports = router;                                        //EXPORTAÇÃO

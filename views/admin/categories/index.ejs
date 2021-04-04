@@ -25,7 +25,10 @@
                     <th>
                         <button class="btn btn-warning">Editar</button>     <!--BOTÃO DE EDITAR-->
 
-                        <button class="btn btn-danger">Deletar</button>     <!--BOTÃO DE DELETAR-->
+                        <form method="POST" action="/categories/delete" style="display: inline">   <!--ESTE FORMULÁRIO PELO METODO POST VAI ENVIAR ESSES DADOS PARA A ROTA: /categories/delete  // style="display: inline" SERVE PARA EVITAR QUE O FORMULARIO QUEBRE A LINHA, DEIXANDO OS BOTÕES ALINHADOS AO INVÉS DE EM CIMA UM DO OUTRO-->
+                            <input type="hidden" name="id" value="<%= category.id %>">   <!--ESSE SERÁ O CAMPO DAS INFORMAÇÕES DE ID QUE SERÁ ENVIADA PARA O BACKEND // INPUT DO TIPO INVISIVEL // NAME="id" SERIA O CAMPO QUE ELE IRÁ ENVIAR PARA O BACKEND, QUE SERÁ LIDO NA var id = req.body.id NO ARQ. CategoriesController.js // value="category.id" ESTA DANDO O VALOR PRA A INPUT E EXIBINDO O ID DA CATEGORIA DO BANCO DE DADOS PELOS COMANDOS DO EJS -->
+                            <button class="btn btn-danger">Deletar</button>     <!--BOTÃO DE DELETAR-->
+                        </form>
                     </th>
                 </tr>
                 <% }) %>
