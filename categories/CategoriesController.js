@@ -24,4 +24,8 @@ router.post("/categories/save", (req, res) =>{                  //ROTA: /categor
     }
 })
 
+router.get("/admin/categories", (req,res) =>{
+    res.render("admin/categories/index")
+})
+
 module.exports = router;                                        //EXPORTAÇÃO

@@ -1,0 +1,30 @@
+<%- include('../../partials/header.ejs') %>         <!--BOOTSTRAP HEADER-->
+<%- include('../../partials/navbar.ejs') %>         <!--NAVBAR-->
+
+
+<div class="container">
+    <hr>   
+    <h2>Categorias</h2>
+    <hr>
+    <table class="table table-bordered">                <!--table - TABELA // class="table table-bordered" - FAZ AS BORDAS DA TABELA NO ESTILO BOOTSTRAP-->
+        <thead>                                         <!--thead - CABEÇALHO DA TABELA-->
+            <tr>                                        <!--tr - LINHA DA TABELA-->
+                <th>Id</th>                             <!--th - COLUNA DA TABELA-->
+                <th>Título</th>
+                <th>Slug</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>                                         <!--tbody - CORPO DA TABELA, ONDE FICARÃO OS DADOS-->
+            <tr>
+                <th>1</th>
+                <th>Dev Web</th>
+                <th>dev-web</th>
+                <th></th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<%- include('../../partials/footer.ejs') %>         <!--BOOTSTRAP FOOTER-->
