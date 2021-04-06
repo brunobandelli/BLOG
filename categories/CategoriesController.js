@@ -70,6 +70,21 @@ router.get("/admin/categories/edit/:id", (req, res) => {
     })
 })
 
+router.post("/categories/update", (req, res) => {
+    var id = req.body.id;                                            //COMO VAMO-S RECEBER O ID ATRAVÉS DO FOMULÁRIO, NÓS VAMOS ACESSAR ATRAVÉS DO .body
+    var title = req.body.title;                                      //AQUI TAMBÉM ESTAMOS RECEBENDO O TITULO ATRAVÉS DO FORMULÁRIO DO FRONTEND, POR ISSO UTILIZAREMOS O .body 
 
+    Category.update({                                               //MODEL: Category.js // .update : METODO PARA ATUALIZAR UM DADO NO BANCO DE DADOS PELO SEQUELIZE
+        title: title,                                               //ATUALIZARÁ ESSE TITULO ( CONFORME A CONDIÇÃO where A BAIXO)
+        slug: slugify(title)                                        //ATUALIZARÁ O SLUG CONFORME O NOVO TITULO
+    },{
+        where: {                                                    //ONDE A CATEGORIA TEM O ID QUE ESTOU RECEBENDO
+            id: id
+        }                                                           //OU SEJÁ: ELE ATUALIZARÁ O TITULO DA CATEGORIA ONDE/ NO QUAL O ID FOI RECEBIDO PELO FORMULÁRIO
+    }).then(() => {                                                 //SE DER CERTO,
+        res.redirect("/admin/categories")                           //REDIRECIONA PARA A ROTA DE CATEGORIAS
+
+    })
+})
 
 module.exports = router;                                        //EXPORTAÇÃO

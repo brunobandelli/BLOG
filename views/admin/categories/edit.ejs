@@ -8,8 +8,9 @@
                 <h2>Edição de categoria</h2>
             </div>
             <div class="card-body">
-                <form method="POST" action="/categories/save">                                                               <!-- DIRECIONAMENTO DE DADOS DO FORMULARIO COM METODO POST PARA ROTA: /categories/save-->
+                <form method="POST" action="/categories/update">                                                               <!-- DIRECIONAMENTO DE DADOS DO FORMULARIO COM METODO POST PARA ROTA: /categories/save-->
                     <input type="text" class="form-control" name="title" placeholder="Definia o titulo da categoria" value="<%= category.title %>"><br>
+                    <input type="hidden" name="id" value="<%= category.id %>">
                     <button class="btn btn-success">Atualizar</button>
                 </form>
             </div>
