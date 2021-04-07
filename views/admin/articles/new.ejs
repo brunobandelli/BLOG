@@ -10,7 +10,7 @@
             <div class="card-body">
                 <form method="POST" action="/categories/save">                                                               <!-- DIRECIONAMENTO DE DADOS DO FORMULARIO COM METODO POST PARA ROTA: /categories/save-->
                     <input type="text" class="form-control" name="title" placeholder="Definia o título do artigo"><br>
-                    <textarea class="form-control" placeholder="Escreva o artigo aqui!" name="body"></textarea><br>
+                    <textarea class="form-control" placeholder="Escreva o artigo aqui!" name="body" id="article"></textarea><br>   <!-- CAMPO DE TEXTO -->
                     <button class="btn btn-success">Cadastrar</button>
                 </form>
             </div>
@@ -18,3 +18,15 @@
 </div>
 
 <%- include('../../partials/footer.ejs') %>         <!--BOOTSTRAP FOOTER-->
+
+<script src="/tinymce/js/tinymce/tinymce.min.js"></script>      <!-- IMPORTAÇÃO DO TINYMCE -->
+<script>
+    tinymce.init({      
+        language: 'pt_BR',                                       //TRADUTOR    
+        selector: "#article",                                    //SELEÇÃO DO CAMPO TEXTAREA PELO ID
+        plugins: [
+            'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons' //PUGLINS, SÃO COMO EXTENSÕES PARA DAR MAIS PODERES AO TINYMCE
+        ]
+    })
+
+</script>
