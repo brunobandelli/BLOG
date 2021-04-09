@@ -20,13 +20,12 @@ router.post("/articles/save",(req, res) => {
     var title = req.body.title;                              // CORPO DO CAMPO NAME TITLE DO HTML 
     var body = req.body.body;                                // CORPO DO CAMPO NAME BODY DO HTML
     var category = req.body.category;                        // CORPO DO CAMPO NAME CATEGORY DO HTML
-
+    
     Article.create({                                        // MODEL (Article.js) ADD UMA NOVA LINHA NO BANCO DE DADOS
         title: title,                                       // RECEBE O VALOR DA VARIAVEL title DO FORMULÁRIO (new.ejs)
         slug: slugify(title),                               // ATUALIZARÁ O SLUG CONFORME O NOVO TITULO
         body: body,                                         // RECEBE O VALOR DA VARIAVEL body DO FORMULÁRIO (new.ejs)
         categoryId: category,                               // REBE O ID DA CATEGORIA
-        
     }).then(() => {
         res.redirect("/admin/articles");
     });
