@@ -4,8 +4,14 @@ const Category = require("../categories/Category")            //IMPORTANDO MODEL
 const Article = require("./Article");                         //MODEL: Article
 const slugify = require("slugify");                           //BIBLIOTECA DO SLUGIFY
 
-router.get("/admin/articles",(req, res) => {                        //ROTA: /articles
-    res.send("ROTA DE ARTIGOS")
+router.get("/admin/articles",(req, res) => {                  //ROTA: /articles
+    Article.findAll({                                         //PESQUISA OS DADOS DO MODEL Article
+        include: [{model: Category}]                          //INCLUINDO DADOS DA CATEGORIA NA BUSCA DE ARTIGOS.
+    }).then(articles => {                                     //RECEBE TODOS OS ARTIGOS
+        res.render("admin/articles/index",{                   //RENDERIZA A INDEX
+            articles:articles                                 //PASSA OS ARTIGOS PARA A VARIAVEL ARTICLES QUE SERÁ UTILIZADA NA FRONTEND
+        });
+    });
 });
 
 router.get("/admin/articles/new", (req, res) => {             //ROTA: /admin/articles/new
