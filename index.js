@@ -32,11 +32,33 @@ app.use("/",categoriesController);                                      //ROTAS 
 app.use("/",articlesController);                                        //ROTAS DO ARQUIVO ( ArticlesController.js )	
 
 app.get("/", (req, res) => {                                            //ROTA PRINCIPAL
-    Article.findAll().then(articles => {                                //MODEL Article COM METODO FINDALL
+    Article.findAll({
+        order:[
+            ['id','DESC']
+        ]
+    }).then(articles => {                                //MODEL Article COM METODO FINDALL
         res.render("index",{articles: articles});                       //RENDERIZANDO A VIEW ("index.ejs") COM TODOS OS ARTIGOS NO FRONTEND
     });
 });
-                                               
+
+app.get("/:slug",(req, res) => {
+    var slug = req.params.slug;
+    Article.findOne({
+        where: { 
+            slug: slug,
+        }
+    }).then(article => {
+        if(article != undefined){
+            res.render("article",{
+                article: article
+            });
+        }else{
+            res.redirect("/");
+        }
+    }).catch( err => {
+        res.redirect("/");
+    });
+})
 
 app.listen(8081, () => {                                                //PORTA DO SERV LOCAL QUE EXECUTA A APP
     console.log("O servidor está rodando")                              //CALLBACK PARA SABER SE O SERV ESTA FUNCIONANDO
