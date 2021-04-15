@@ -70,7 +70,7 @@ app.get("/:slug",(req, res) => {
     });
 })
 
-//FILTRO DE CATEGORIAS PELA NAVBAR
+//PAGINA FILTRADA DE CATEGORIAS PELA NAVBAR
 app.get("/category/:slug", (req, res) => {
     var slug = req.params.slug
     Category.findOne({                                      //BUSCA UNICA DE CATEGORY PELO SLUG
