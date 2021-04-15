@@ -56,8 +56,8 @@ app.get("/:slug",(req, res) => {
         }
     }).then(article => {
         if(article != undefined){
-            Category.findAll().then(categories => {                             //RENDERIZANDO A VIEW ("index.ejs") COM TODOS OS ARTIGOS NO FRONTEND
-                res.render("article",{
+            Category.findAll().then(categories => {                             
+                res.render("article",{                                          //RENDERIZANDO A VIEW ("article") COM TODOS OS ARTIGOS NO FRONTEND
                     article: article,                                           //ARTIGOS DADOS
                     categories: categories                                      //CATEGORIAS DADOS
                 });                       
