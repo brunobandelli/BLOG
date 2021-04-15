@@ -56,7 +56,7 @@ app.get("/:slug",(req, res) => {
             slug: slug,
         }
     }).then(article => {
-        if(article != undefined){
+        if(article != undefined){                                               
             Category.findAll().then(categories => {                             
                 res.render("article",{                                          //RENDERIZANDO A VIEW ("article") COM TODOS OS ARTIGOS NO FRONTEND
                     article: article,                                           //ARTIGOS DADOS
@@ -84,7 +84,7 @@ app.get("/category/:slug", (req, res) => {
             Category.findAll().then(categories => {         //BUSCA TODAS AS CATEGORIAS
                     res.render("index",{                    //RENDERIZA A PAGINA PRINCIPAL index.ejs
                         articles: category.articles,        //PUXA OS ARTIGOS DA CATEGORIA ATRAVÉS DO RELACIONAMENTO USANDO O JOIN DE INCLUDE ACIMA.
-                        categories: categories              //PUXA TODAS AS CATEGORIAS.
+                        categories: categories              //PUXA TODAS AS CATEGORIAS QUE TAMBÉM SERÁ USADA NO HOMENAVBAR
                     });
             });
         }else{
