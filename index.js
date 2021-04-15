@@ -31,6 +31,7 @@ connection                                                              //OBJETO
 app.use("/",categoriesController);                                      //ROTAS DO ARQUIVO ( CategoriesController.js )	
 app.use("/",articlesController);                                        //ROTAS DO ARQUIVO ( ArticlesController.js )	
 
+//PAGINA PRINCIPAL
 app.get("/", (req, res) => {                                            //ROTA PRINCIPAL
     Article.findAll({
         order:[
@@ -40,7 +41,7 @@ app.get("/", (req, res) => {                                            //ROTA P
         Category.findAll().then(categories => {                             //RENDERIZANDO A VIEW ("index.ejs") COM TODOS OS ARTIGOS NO FRONTEND
             res.render("index",{
                 articles: articles,                                         //ARTIGOS DADOS
-                categories: categories                                      //CATEGORIAS DADOS
+                categories: categories                                      //CATEGORIAS DADOS, SERÁ UTILIZADA PARA EXIBIR O TITULO DAS CATEGORIAS NA HOMENAVBAR 
             });                       
         })
        
@@ -59,7 +60,7 @@ app.get("/:slug",(req, res) => {
             Category.findAll().then(categories => {                             
                 res.render("article",{                                          //RENDERIZANDO A VIEW ("article") COM TODOS OS ARTIGOS NO FRONTEND
                     article: article,                                           //ARTIGOS DADOS
-                    categories: categories                                      //CATEGORIAS DADOS
+                    categories: categories                                      //CATEGORIAS DADOS, SERÁ UTILIZADA PARA EXIBIR O TITULO DAS CATEGORIAS NA HOMENAVBAR 
                 });                       
             })   
         }else{
