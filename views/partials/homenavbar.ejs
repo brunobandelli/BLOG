@@ -1,9 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">                    <!--CLASSE: navbar-expand-lg: IRÁ EXPANDIR O CONTEUDO DA NAVBAR POR TODA A TELA, EVITANDO A QUEBRA DE LINHA-->
     <a class="navbar-brand" href="/">
-        GuiaPress
+         GuiaPress
     </a>
     <ul class="navbar-nav me-auto">                                             <!-- ul - LISTA/MENU // class="navbar-nav" - PARA DIZER QUE ESSE MENU/LISTA FAZ PARTE DA NAVBAR // class="me-auto" - ALINHAMENTO(ADICIONA UMA MARGEM TOTAL PARA A DIREITA) OU SEJÁ, PARA MANDAR MENU PARA O LADO ESQUERDO DA NAVBAR // OBS NO BOOTSTRAP 5 SE USA: me-auto , ANTES NO BOOTSTRAP 4 ERA mr-auto -->
         <li class="nav-item">                                                   <!-- li - ITENS DA LISTA // class="nav-item" PARA DIZER QUE ESSE ITEM FAZ PARTE DE UMA LISTA/MENU DE UMA NAVBAR -->
             <a class="nav-link" href="/">Home</a>        <!-- class="nav-link" - PARA SE AUTO ADAPTAR AO ESTILO DA NAVBAR, ASSIM NÃO FICA INVISIVEL A PALAVRA -->
         </li>
+        <% categories.forEach(category => { %>                                  <!-- LISTA DINAMICA DE TITULO DE ARTIGO NA NAVBAR-->
+            <li class="nav-item">
+                <a class="nav-link" href="/category/<%= category.slug %>"><%= category.title %></a>             
+            </li>
+        <% })%>
+    </ul>
 </nav>

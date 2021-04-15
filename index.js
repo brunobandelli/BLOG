@@ -36,8 +36,14 @@ app.get("/", (req, res) => {                                            //ROTA P
         order:[
             ['id','DESC']
         ]
-    }).then(articles => {                                //MODEL Article COM METODO FINDALL
-        res.render("index",{articles: articles});                       //RENDERIZANDO A VIEW ("index.ejs") COM TODOS OS ARTIGOS NO FRONTEND
+    }).then(articles => {                                                   //MODEL Article COM METODO FINDALL
+        Category.findAll().then(categories => {                             //RENDERIZANDO A VIEW ("index.ejs") COM TODOS OS ARTIGOS NO FRONTEND
+            res.render("index",{
+                articles: articles,                                         //ARTIGOS DADOS
+                categories: categories                                      //CATEGORIAS DADOS
+            });                       
+        })
+       
     });
 });
 
@@ -49,15 +55,41 @@ app.get("/:slug",(req, res) => {
         }
     }).then(article => {
         if(article != undefined){
-            res.render("article",{
-                article: article
-            });
+            Category.findAll().then(categories => {                             //RENDERIZANDO A VIEW ("index.ejs") COM TODOS OS ARTIGOS NO FRONTEND
+                res.render("article",{
+                    article: article,                                         //ARTIGOS DADOS
+                    categories: categories                                      //CATEGORIAS DADOS
+                });                       
+            })   
         }else{
             res.redirect("/");
         }
     }).catch( err => {
         res.redirect("/");
     });
+})
+
+app.get("/category/:slug", (req, res) => {
+    var slug = req.params.slug
+    Category.findOne({                                      //BUSCA UNICA DE CATEGORY PELO SLUG
+        where:{
+            slug: slug                                      //ONDE POSSUA O SLUG
+        },
+        include: [{model: Article}]                         //INCLUI O MODEL Article NA BUSCA, DENTRO DE UM ARRAY
+    }).then( category => {
+        if(category !== undefined){
+            Category.findAll().then(categories => {         //BUSCA TODAS AS CATEGORIAS
+                    res.render("index",{                    //RENDERIZA A PAGINA PRINCIPAL index.ejs
+                        articles: category.articles,        //PUXA OS ARTIGOS DA CATEGORIA ATRAVÉS DO RELACIONAMENTO USANDO O JOIN DE INCLUDE ACIMA.
+                        categories: categories              //PUXA TODAS AS CATEGORIAS.
+                    });
+            });
+        }else{
+            res.redirect("/");
+        }
+    }).catch( err => {
+        res.redirect("/");
+    })
 })
 
 app.listen(8081, () => {                                                //PORTA DO SERV LOCAL QUE EXECUTA A APP
