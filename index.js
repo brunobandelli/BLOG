@@ -51,7 +51,7 @@ app.get("/", (req, res) => {                                            //ROTA P
 //PAGINA DO ARTIGO 
 app.get("/:slug",(req, res) => {                                                
     var slug = req.params.slug;
-    Article.findOne({
+    Article.findOne({                                                          //IREI BUSCAR UMA CATEGORIA, ATRAVÉS DO SLUG DELA
         where: { 
             slug: slug,
         }
