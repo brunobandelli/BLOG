@@ -24,16 +24,26 @@
         </div>
 </div>
 
-<%- include('../../partials/footer.ejs') %>         <!--BOOTSTRAP FOOTER-->
+<div id="content" style="display: none">
+    <%- article.body %>
+</div>
 
-<script src="/tinymce/js/tinymce/tinymce.min.js"></script>      <!-- IMPORTAÇÃO DO TINYMCE -->
+<%- include('../../partials/footer.ejs') %>                     <!--BOOTSTRAP FOOTER-->
+
+<script src="/tinymce/js/tinymce/tinymce.min.js"></script>              <!-- IMPORTAÇÃO DO TINYMCE -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>     <!-- IMPORTAÇÃO JQUERY-->
+
+
 <script>
     tinymce.init({      
         language: 'pt_BR',                                       //TRADUTOR    
         selector: "#article",                                    //SELEÇÃO DO CAMPO TEXTAREA PELO ID
         plugins: [
             'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons' //PUGLINS, SÃO COMO EXTENSÕES PARA DAR MAIS PODERES AO TINYMCE
-        ]
+        ],
+        init_instance_callback: () => {
+            tinymce.get("article").setContent($("#content").html())
+        }
     })
 
 </script>
