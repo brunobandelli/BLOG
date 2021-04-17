@@ -8,13 +8,17 @@
                 <h2>Editar Artigo</h2>
             </div>
             <div class="card-body">
-                <form method="POST" action="/articles/save">                                                               <!-- DIRECIONAMENTO DE DADOS DO FORMULARIO COM METODO POST PARA ROTA: /categories/save-->
+                <form method="POST" action="/articles/update">                                                               <!-- DIRECIONAMENTO DE DADOS DO FORMULARIO COM METODO POST PARA ROTA: /categories/save-->
                     <input type="text" class="form-control" name="title" placeholder="Defina o título do artigo"><br>
                     <textarea class="form-control" placeholder="Escreva o artigo aqui!" name="body" id="article"></textarea><br>   <!-- CAMPO DE TEXTO -->
                     <label>Categoria</label>                                                        <!-- LABER PARA O SELECT-->
                     <select name="category" class="form-select">                                   <!-- SELECT COM NOME PARA PASSAR OS DADOS PARA O BACKEND-->
                         <% categories.forEach((category)=>{ %>                                      <!-- DADOS DA VARIAVEL cateogires DO BACK END SENDO PARASSADO PARA A VARIAVEL category PELO METODO forEach-->
-                            <option value="<%= category.id  %>"><%= category.title %></option>      <!-- OPÇÕES DO SELECT COM OS TITULOS DAS CATEOGORIAS E VALOR DO ID DAS CATEGORIAS DADO AOS OPTIONS-->
+                            <% if(category.id == article.categoryId){ %>
+                                <option value="<%= category.id %>"selected><%= category.title %></option>   <!-- OPÇÕES DO SELECT COM OS TITULOS DAS CATEOGORIAS E VALOR DO ID DAS CATEGORIAS DADO AOS OPTIONS COM O ATRIBUTO SELECTED QUE DEIXA SLECIONADO O TITULO DA CATEGORIA CORRESPONDENTE À O ARTIGO-->
+                            <% } else { %> 
+                                <option value="<%= category.id %>"><%= category.title %></option>    <!-- OPÇÕES DO SELECT COM OS TITULOS DAS CATEOGORIAS E VALOR DO ID DAS CATEGORIAS DADO AOS OPTIONS-->
+                            <% } %> 
                       <% }) %>
                     </select>
                     <br>
