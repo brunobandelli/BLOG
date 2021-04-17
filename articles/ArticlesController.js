@@ -87,11 +87,11 @@ router.post("/articles/update", (req, res) => {
         slug: slugify(title)
     },{
         where: {
-            id: id
+            id: id                                  //AQUI É ONDE PEGA A REFERENCIA DO ID DO INPUT DO FORMULARIO DO ARQUIVO edit.ejs
             
         }
     }).then(() => {
-        res.redirect("admin/articles");
+        res.redirect("/admin/articles");
     }).catch(err => {
         res.redirect("/");
     });

@@ -8,7 +8,8 @@
                 <h2>Editar Artigo</h2>
             </div>
             <div class="card-body">
-                <form method="POST" action="/articles/update">                                                               <!-- DIRECIONAMENTO DE DADOS DO FORMULARIO COM METODO POST PARA ROTA: /categories/save-->
+                <form method="POST" action="/articles/update">                                                               <!-- DIRECIONAMENTO DE DADOS DO FORMULARIO COM METODO POST PARA ROTA: /articles/update -->
+                    <input type="hidden" value="<%= article.id %>" name="id">                                                <!-- ID QUE SERVE DE REFERENCIA PARA FAZER A EDIÇÃO DO CONTEUDO DO ARTIGO-->
                     <input type="text" class="form-control" name="title" placeholder="Defina o título do artigo"><br>
                     <textarea class="form-control" placeholder="Escreva o artigo aqui!" name="body" id="article"></textarea><br>   <!-- CAMPO DE TEXTO -->
                     <label>Categoria</label>                                                        <!-- LABER PARA O SELECT-->
