@@ -1,0 +1,50 @@
+<%- include('../../partials/header.ejs') %>         <!--BOOTSTRAP HEADER-->
+<%- include('../../partials/navbar.ejs') %>         <!--NAVBAR-->
+
+
+<div class="container">
+    <hr>   
+    <h2>Artigos</h2>
+    <a class="btn btn-success" href="/admin/articles/new">Criar Novo Artigo</a>
+    <hr>
+    <table class="table table-bordered">                    <!--table - TABELA // class="table table-bordered" - FAZ AS BORDAS DA TABELA NO ESTILO BOOTSTRAP-->
+        <thead>                                             <!--thead - CABEÇALHO DA TABELA-->
+            <tr>                                            <!--tr - LINHA DA TABELA-->
+                <th>Id</th>                                 <!--th - COLUNA DA TABELA-->
+                <th>Título</th>
+                <th>Slug</th>
+                <th>Categoria</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>                                             <!--tbody - CORPO DA TABELA, ONDE FICARÃO OS DADOS-->
+             <% articles.forEach(article => { %>            <!--TRANSFERE OS DADOS DA VARIAVEL articles PARA CADA VARIAVEL article DENTRO DO forEach()-->
+                <tr>
+                <td><%= article.id %></td>                  <!--td - TABLE DATA - CÉLULA DA TABELA //EXIBI O id DE CADA VARIAVEL article DENTRO DO forEach-->               
+                <td><%= article.title %></td>               <!--EXIBI O title DE CADA VARIAVEL article DENTRO DO forEach--> 
+                <td><%= article.slug %></td>                <!--EXIBI O slug DE CADA VARIAVEL article DENTRO DO forEach--> 
+                <td><%= article.category.title %></td>      <!--EXIBI O title DA CATEGORIA ATRAVÉS DO RELACIONAMENTO USANDO O INCLUDE NO Article DENTRO DO forEach--> 
+                <td>
+                    <form method="POST" action="/articles/delete" style="display: inline" onsubmit="confirmarDelecao(event, this)">   <!--ESTE FORMULÁRIO PELO METODO POST VAI ENVIAR ESSES DADOS PARA A ROTA: /articles/delete  // style="display: inline" SERVE PARA EVITAR QUE O FORMULARIO QUEBRE A LINHA, DEIXANDO OS BOTÕES ALINHADOS AO INVÉS DE EM CIMA UM DO OUTRO // onsubimit REALIZARÁ A FUNÇÃO DE CONFIRMAÇÃO SOBRE A AÇÃO-->
+                        <input type="hidden" name="id" value="<%= article.id %>">   <!--ESSE SERÁ O CAMPO DAS INFORMAÇÕES DE ID QUE SERÁ ENVIADA PARA O BACKEND // INPUT DO TIPO INVISIVEL // NAME="id" SERIA O CAMPO QUE ELE IRÁ ENVIAR PARA O BACKEND, QUE SERÁ LIDO NA var id = req.body.id NO ARQ. ArticlesController.js // value="article.id" ESTA DANDO O VALOR PRA A INPUT E EXIBINDO O ID DO ARTIGO DO BANCO DE DADOS PELOS COMANDOS DO EJS -->
+                        <button class="btn btn-danger">Deletar</button>     <!--BOTÃO DE DELETAR-->
+                    </form>  
+                </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+
+<%- include('../../partials/footer.ejs') %>         <!--BOOTSTRAP FOOTER-->
+
+<script>
+    function confirmarDelecao(event, form){
+        event.preventDefault();
+        var decision = confirm("Você quer deletar este artigo?");
+        if(decision){
+            form.submit();
+        }
+    }
+</script>

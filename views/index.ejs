@@ -1,5 +1,34 @@
 <%- include('partials/header.ejs') %>
+<%- include('partials/homenavbar.ejs') %>         
 <body>
-    <h1>OLÁ MUNDO!</h1>
+    <div class="container">
+        <hr>
+        <div class="jumbotron form-control bg-light ">
+            <h1 class="display-4">Bem Vindo</h1>
+            <p class="lead">Este é um simples blog do Bruno Bandelli.</p>
+            <hr class="my-4">
+            <p>Descrição detalhada !</p>
+            <a class="btn btn-primary btn-lg" href="#" role="button">Leia mais</a>
+          </div>
+        <hr>
+        <% articles.forEach(article => { %>            <!--TRANSFERE OS DADOS DA VARIAVEL articles PARA CADA VARIAVEL article DENTRO DO forEach()-->
+           <div class="card">
+               <div class="card-header">
+                    <h2><%=article.title%></h2>
+               </div>
+               <div class="card-body">
+                    <a href="/<%= article.slug %>" class="btn btn-success">Ler artigo</a>
+               </div>
+           </div>
+           <br>
+        <% }) %>
+           <div class="rows">
+                <div class="col col-12">
+                    <a href="/articles/page/2" style="float:right">Next >></a>
+                    <br>
+                </div>
+                <hr>
+            </div>
+    </div>
 </body>
 <%- include('partials/footer.ejs') %>

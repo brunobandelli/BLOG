@@ -1,0 +1,54 @@
+<%- include('../../partials/header.ejs') %>         <!--BOOTSTRAP HEADER-->
+<%- include('../../partials/navbar.ejs') %>         <!--NAVBAR-->
+
+<div class="container">
+    <hr>
+        <div class="card">
+            <div class="card-header">
+                <h2>Editar Artigo</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/articles/update">                                                               <!-- DIRECIONAMENTO DE DADOS DO FORMULARIO COM METODO POST PARA ROTA: /articles/update -->
+                    <input type="hidden" value="<%= article.id %>" name="id">                                                <!-- ID QUE SERVE DE REFERENCIA PARA FAZER A EDIÇÃO DO CONTEUDO DO ARTIGO-->
+                    <input type="text" class="form-control" name="title" placeholder="Defina o título do artigo"><br>
+                    <textarea class="form-control" placeholder="Escreva o artigo aqui!" name="body" id="article"></textarea><br>   <!-- CAMPO DE TEXTO -->
+                    <label>Categoria</label>                                                        <!-- LABER PARA O SELECT-->
+                    <select name="category" class="form-select">                                   <!-- SELECT COM NOME PARA PASSAR OS DADOS PARA O BACKEND-->
+                        <% categories.forEach((category)=>{ %>                                      <!-- DADOS DA VARIAVEL cateogires DO BACK END SENDO PARASSADO PARA A VARIAVEL category PELO METODO forEach-->
+                            <% if(category.id == article.categoryId){ %>
+                                <option value="<%= category.id %>"selected><%= category.title %></option>   <!-- OPÇÕES DO SELECT COM OS TITULOS DAS CATEOGORIAS E VALOR DO ID DAS CATEGORIAS DADO AOS OPTIONS COM O ATRIBUTO SELECTED QUE DEIXA SLECIONADO O TITULO DA CATEGORIA CORRESPONDENTE À O ARTIGO-->
+                            <% } else { %> 
+                                <option value="<%= category.id %>"><%= category.title %></option>    <!-- OPÇÕES DO SELECT COM OS TITULOS DAS CATEOGORIAS E VALOR DO ID DAS CATEGORIAS DADO AOS OPTIONS-->
+                            <% } %> 
+                      <% }) %>
+                    </select>
+                    <br>
+                    <button class="btn btn-success">Atualizar</button>
+                </form>
+            </div>
+        </div>
+</div>
+
+<div id="content" style="display: none">
+    <%- article.body %>
+</div>
+
+<%- include('../../partials/footer.ejs') %>                     <!--BOOTSTRAP FOOTER-->
+
+<script src="/tinymce/js/tinymce/tinymce.min.js"></script>              <!-- IMPORTAÇÃO DO TINYMCE -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>     <!-- IMPORTAÇÃO JQUERY-->
+
+
+<script>
+    tinymce.init({      
+        language: 'pt_BR',                                       //TRADUTOR    
+        selector: "#article",                                    //SELEÇÃO DO CAMPO TEXTAREA PELO ID
+        plugins: [
+            'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons' //PUGLINS, SÃO COMO EXTENSÕES PARA DAR MAIS PODERES AO TINYMCE
+        ],
+        init_instance_callback: () => {
+            tinymce.get("article").setContent($("#content").html())
+        }
+    })
+
+</script>
