@@ -6,7 +6,9 @@ const categoriesController = require("./categories/CategoriesController")   //IM
 const articlesController = require("./articles/ArticlesController");        //IMPORTANDO O ArticlesController.js
 const Article = require("./articles/Article");                              //IMPORTANDO O Article.js
 const Category = require("./categories/Category");                          //IMPOTANDO O Category.js
-const usersConstroller = require("./users/UsersController");                //IMPOTANDO O User.js
+const usersConstroller = require("./users/UsersController");                //IMPOTANDO O UsersController.s
+const User = require("./users/User");                                       //IMPORTANTDO O User.js
+
 
 //View engine
 app.set('view engine','ejs');                                          //VIEW ENGINE: EJS

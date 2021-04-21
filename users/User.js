@@ -12,5 +12,4 @@ const User = connection.define('users',{                   //TABELA: CATEGORIES
 })
 
 
-
 module.exports = User;                                              //EXPORTAÇÃO DO MODULE
