@@ -4,7 +4,9 @@ const User = require("./User");
 const bcrypt = require('bcryptjs');                         //BIBLIOTECA DE CRIPTOGRAFIA 
 
 router.get("/admin/users", (req, res) => {
-    res.send("Listagem de Usuários");
+    User.findAll().then(users =>{
+        res.render("admin/users/index", {users: users});
+    })
 });
 
 router.get("/admin/users/create", (req, res) => {

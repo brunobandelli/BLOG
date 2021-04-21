@@ -1,0 +1,29 @@
+<%- include('../../partials/header.ejs') %>         <!--BOOTSTRAP HEADER-->
+<%- include('../../partials/navbar.ejs') %>         <!--NAVBAR-->
+
+
+<div class="container">
+    <hr>   
+    <h2>Usuários</h2>
+    <a class="btn btn-success" href="/admin/users/create">Criar Novo Usuário </a>
+    <hr>
+    <table class="table table-bordered">                <!--table - TABELA // class="table table-bordered" - FAZ AS BORDAS DA TABELA NO ESTILO BOOTSTRAP-->
+        <thead>                                         <!--thead - CABEÇALHO DA TABELA-->
+            <tr>                                        <!--tr - LINHA DA TABELA-->
+                <th>Id</th>                             <!--th - COLUNA DA TABELA-->
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>                                         <!--tbody - CORPO DA TABELA, ONDE FICARÃO OS DADOS-->
+              <% users.forEach(user =>{ %>              <!--TRANSFERE OS DADOS DA VARIAVEL users PARA CADA VARIAVEL user DENTRO DO forEach()-->
+                <tr>
+                    <td><%= user.id %> </td>            <!-- td - TABLE DATA - CÉLULA DA TABELA// MOSTRARÁ O ID DO USUARIO-->
+                    <td><%= user.email %></td>          <!-- MOSTRARÁ O EMAIL DO USUARIO-->
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('../../partials/footer.ejs') %>         <!--BOOTSTRAP FOOTER-->
+

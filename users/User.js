@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const connection = require("../database/database");
 
-const User = connection.define('users',{                   //TABELA: CATEGORIES
+const User = connection.define('users',{                            //TABELA: CATEGORIES
     email:{                                                         // COLUNA: email
         type: Sequelize.STRING,                                     // TITULO DO TIPO STRING
         allowNull: false                                            // NÃO SERÁ PERMITIDO DADOS NULOS PARA O TITULO DA CATEGORIA
