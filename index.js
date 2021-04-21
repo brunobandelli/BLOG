@@ -36,7 +36,8 @@ app.get("/", (req, res) => {                                            //ROTA P
     Article.findAll({
         order:[
             ['id','DESC']
-        ]
+        ],
+        limit: 4
     }).then(articles => {                                                   //MODEL Article COM METODO FINDALL
         Category.findAll().then(categories => {                             //RENDERIZANDO A VIEW ("index.ejs") COM TODOS OS ARTIGOS NO FRONTEND
             res.render("index",{
