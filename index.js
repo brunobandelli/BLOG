@@ -6,6 +6,7 @@ const categoriesController = require("./categories/CategoriesController")   //IM
 const articlesController = require("./articles/ArticlesController");        //IMPORTANDO O ArticlesController.js
 const Article = require("./articles/Article");                              //IMPORTANDO O Article.js
 const Category = require("./categories/Category");                          //IMPOTANDO O Category.js
+const usersConstroller = require("./users/UsersController");                //IMPOTANDO O User.js
 
 //View engine
 app.set('view engine','ejs');                                          //VIEW ENGINE: EJS
@@ -28,8 +29,10 @@ connection                                                              //OBJETO
         console.log("error");                                           //IRÁ APARECER: error
     })
 
+//DEFINIÇÃO DE UTILIZAÇÃO DE CONTROLLERS:
 app.use("/",categoriesController);                                      //ROTAS DO ARQUIVO ( CategoriesController.js )	
 app.use("/",articlesController);                                        //ROTAS DO ARQUIVO ( ArticlesController.js )	
+app.use("/",usersConstroller);                                          //ROTAS DO ARQUIVO ( UsersController.js )
 
 //PAGINA PRINCIPAL
 app.get("/", (req, res) => {                                            //ROTA PRINCIPAL
