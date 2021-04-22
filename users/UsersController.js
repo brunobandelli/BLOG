@@ -13,27 +13,27 @@ router.get("/admin/users/create", (req, res) => {
     res.render("admin/users/create");
 });
 
-router.post("/users/create", (req, res) => {
-    var email = req.body.email;
-    var password = req.body.password;
+router.post("/users/create", (req, res) => {                            //ROTA DE CRIAÇÃO DE USUARIOS
+    var email = req.body.email;                                         //REQUISIÇÃO DO EMAIL RECEBIDO PELO BODY DO FRONTEND
+    var password = req.body.password;                                   //REQUISIÇÃO DA SENHA RECEBIDA PELO BODY DO FRONTEND
 
-    User.findOne({where:{email: email}}).then( user => {
-        if(user == undefined ){
+    User.findOne({where:{email: email}}).then( user => {                //SISTEMA PARA EVITAR DUPLICAÇÃO DE USUARIO
+        if(user == undefined ){                                         //SE FOR UM USUARIO INDEFINIDO, PERMITE A CRIAÇÃO
     
 
-    var salt = bcrypt.genSaltSync(10);
-    var hash = bcrypt.hashSync(password, salt);
+    var salt = bcrypt.genSaltSync(10);                                  //INCREMENTA + SEGURANÇA NA CRIPTOGRAFIA DA SENHA
+    var hash = bcrypt.hashSync(password, salt);                         //CRIPTOGRAFIA DA SENHA
 
-    User.create({
-        email: email,
-        password: hash
+    User.create({                                                       //CRIA O NOVO USUARIO NO BANCO DE DADOS
+        email: email,                                                   //RECEBE O EMAIL PARA O BANCO DE DADOS
+        password: hash                                                  // RECEBE A SENHA PARA O BANCO DE DADOS
     }).then(() => {
         res.redirect("/");
     }).catch(() => {
         res.redirect("/");
     })
 
-        }else{
+        }else{                                                          //SE JÁ FOR UM USUARIO DEFINIDO ELE REDIRECIONA PARA UMA PAGINA E EVITA A DUPLICAÇÃO DE CRIAÇÃO DE USUARIO.
             res.redirect("/admin/users/create");
         }
     })
