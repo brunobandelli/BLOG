@@ -8,10 +8,18 @@ const Article = require("./articles/Article");                              //IM
 const Category = require("./categories/Category");                          //IMPOTANDO O Category.js
 const usersConstroller = require("./users/UsersController");                //IMPOTANDO O UsersController.s
 const User = require("./users/User");                                       //IMPORTANTDO O User.js
+const session = require("express-session")                                  //BIBLIOTECA DE SESSÃO DE COOKIES
+
 
 
 //View engine
 app.set('view engine','ejs');                                          //VIEW ENGINE: EJS
+
+// Sessions
+app.get(session({
+    secret: "qualquercoisa",                                           //É UM CAMPO DE TEXTO ALEATORIO PARA AUMENTAR A SEGURANÇA DAS SESSÕES, COMO SE FOSSE UMA SENHA PARA DECRIPTAR SUAS SESSÕES, É ROCOMENDADO COLOCAR ALGO BEM ALEATORIO.( É UM TEXTO ALEATORIO QUE O EXPRESS SESSION PEDE PARA AUMENTAR A SEGURANÇA DAS SESSÕES, COMO SE FOSSE O SALT DO BCRYPT )
+    cookie: { maxAge: 30000}                                           //TEMPO EM QUE O COOKIE FICA SALVO NA MEMORIA.
+}))
 
 // Static
 app.use(express.static('public'));                                      //IRA LER/CARREGAR OS ARQUIVOS ESTÁTICOS DENTRO DA PASTA public
