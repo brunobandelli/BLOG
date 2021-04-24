@@ -16,9 +16,9 @@ const session = require("express-session")                                  //BI
 app.set('view engine','ejs');                                          //VIEW ENGINE: EJS
 
 // Sessions
-app.get(session({
+app.use(session({
     secret: "qualquercoisa",                                           //É UM CAMPO DE TEXTO ALEATORIO PARA AUMENTAR A SEGURANÇA DAS SESSÕES, COMO SE FOSSE UMA SENHA PARA DECRIPTAR SUAS SESSÕES, É ROCOMENDADO COLOCAR ALGO BEM ALEATORIO.( É UM TEXTO ALEATORIO QUE O EXPRESS SESSION PEDE PARA AUMENTAR A SEGURANÇA DAS SESSÕES, COMO SE FOSSE O SALT DO BCRYPT )
-    cookie: { maxAge: 30000}                                           //TEMPO EM QUE O COOKIE FICA SALVO NA MEMORIA.
+    cookie: { maxAge: 30000},                                           //TEMPO EM QUE O COOKIE FICA SALVO NA MEMORIA.
 }))
 
 // Static
@@ -43,6 +43,7 @@ connection                                                              //OBJETO
 app.use("/",categoriesController);                                      //ROTAS DO ARQUIVO ( CategoriesController.js )	
 app.use("/",articlesController);                                        //ROTAS DO ARQUIVO ( ArticlesController.js )	
 app.use("/",usersConstroller);                                          //ROTAS DO ARQUIVO ( UsersController.js )
+
 
 //PAGINA PRINCIPAL
 app.get("/", (req, res) => {                                            //ROTA PRINCIPAL
