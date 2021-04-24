@@ -5,14 +5,14 @@
     <hr>
         <div class="card mt-5">                         <!-- mt-5 // É O ESPAÇO DA MARGEM NO TOPO( mt= MARGE TOP ), OBS: SÓ VAI DE 1 ATÉ 5-->
             <div class="card-header">
-                <h2>Criação de Usuário</h2>
+                <h2>Login de admin</h2>
             </div>
             <div class="card-body">
-                <form action="/users/create" method="POST">
+                <form action="/authenticate" method="POST">
                     <input class="form-control" name="email" type="email" placeholder="email@exemplo.com"><br>
                     <input class="form-control" name="password" type="password" placeholder="*******" ><br>
                       <div class="d-grid gap-2">        <!-- ESTICA O BOTÃO NO FORMULÁRIO-->
-                        <button type="submit" class="btn btn-success">Criar</button>
+                        <button type="submit" class="btn btn-success">Logar</button>
                       </div>
                 </form>
             </div>
