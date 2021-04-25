@@ -3,8 +3,9 @@ const router = express.Router();                              //ROUTER
 const Category = require("../categories/Category")            //IMPORTANDO MODEL Category  
 const Article = require("./Article");                         //MODEL: Article
 const slugify = require("slugify");                           //BIBLIOTECA DO SLUGIFY
+const adminAuth = require("../middlewares/adminAuth");        //IMPORTANDO MIDDLEWARE
 
-router.get("/admin/articles",(req, res) => {                  //ROTA: /articles
+router.get("/admin/articles", adminAuth,(req, res) => {       //ROTA: /articles
     Article.findAll({                                         //PESQUISA OS DADOS DO MODEL Article
         include: [{model: Category}]                          //INCLUINDO DADOS DA CATEGORIA NA BUSCA DE ARTIGOS.
     }).then(articles => {                                     //RECEBE TODOS OS ARTIGOS
@@ -14,7 +15,7 @@ router.get("/admin/articles",(req, res) => {                  //ROTA: /articles
     });
 });
 
-router.get("/admin/articles/new", (req, res) => {             //ROTA: /admin/articles/new
+router.get("/admin/articles/new", adminAuth,(req, res) => {   //ROTA: /admin/articles/new
     Category.findAll().then(categories => {                   //RECEBE TODAS AS CATEGORIAS
         res.render("admin/articles/new",{                     //RENDERIZA A NEW
             categories: categories                            //PASSA AS CATEGORIAS PARA A VARIAVEL CATEGORIAS QUE SERÁ UTILIZADA NO FRONTEND.
@@ -22,7 +23,7 @@ router.get("/admin/articles/new", (req, res) => {             //ROTA: /admin/art
     })
 })
 
-router.post("/articles/save",(req, res) => {
+router.post("/articles/save", adminAuth,(req, res) => {
     var title = req.body.title;                              // CORPO DO CAMPO NAME TITLE DO HTML 
     var body = req.body.body;                                // CORPO DO CAMPO NAME BODY DO HTML
     var category = req.body.category;                        // CORPO DO CAMPO NAME CATEGORY DO HTML
@@ -37,7 +38,7 @@ router.post("/articles/save",(req, res) => {
     });
 });
 
-router.post("/articles/delete", (req, res) =>{                      //ROTA:/articles/delete TIPO POST
+router.post("/articles/delete", adminAuth, (req, res) =>{                      //ROTA:/articles/delete TIPO POST
     var id = req.body.id;                                           //ESSE É A VARIAVEL QUE IRÁ RECEBER AS INFORMÇÕES DA ID DO FRONTEND PELO FORMULÁRIO //AQUI EU VOU RECEBER O id PELO FORMULARIO DO FRONTEND NA TAG <input name="id" ...> DO ARQ. index.ejs DA PASTA categories
     if(id != undefined){                                            //VERIFICAÇÃO DE ID SE É VALIDO (SE É DIFERENTE DE UNDEFINED)
         if(!isNaN(id)){                                             //VERIFICAÇÃO SE O ID É UM NUMERO (SE É DIFERENTE DE UM NÃO NUMERO)
@@ -56,7 +57,7 @@ router.post("/articles/delete", (req, res) =>{                      //ROTA:/arti
     }
 })
 
-router.get("/admin/articles/edit/:id",(req, res) => {
+router.get("/admin/articles/edit/:id", adminAuth,(req, res) => {
     var id = req.params.id;
     Article.findByPk(id).then(article => {
         if(article != undefined){
@@ -74,7 +75,7 @@ router.get("/admin/articles/edit/:id",(req, res) => {
     });
 })
 
-router.post("/articles/update", (req, res) => {
+router.post("/articles/update", adminAuth,(req, res) => {
     var id = req.body.id;
     var title = req.body.title;                                           //
     var body = req.body.body;

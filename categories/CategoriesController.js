@@ -2,12 +2,13 @@ const express = require("express");                             //EXPRESS
 const router = express.Router();                                //ROUTER
 const Category = require("./Category");                         //MODEL: Category.js
 const slugify = require("slugify");                              //BIBLIOTECA SLUGIFY
+const adminAuth = require("../middlewares/adminAuth");        //IMPORTANDO MIDDLEWARE
 
-router.get("/admin/categories/new", (req, res) => {             //ROTA: /admin/categories/new
+router.get("/admin/categories/new", adminAuth,(req, res) => {             //ROTA: /admin/categories/new
     res.render("./admin/categories/new")                        //RENDERIZAÇÃO DO ARQ.(new.ejs) DA PASTA views/admin/categories
 })
 
-router.post("/categories/save", (req, res) =>{                  //ROTA: /categories/save
+router.post("/categories/save", adminAuth,(req, res) =>{                  //ROTA: /categories/save
     var title = req.body.title;                                 //DADOS DO FORMULÁRIO(new.ejs)
     if(title != undefined){                                     //NÃO PERMITE INSERIR VALORES NULO NO FORMULÁRIO
 
@@ -24,7 +25,7 @@ router.post("/categories/save", (req, res) =>{                  //ROTA: /categor
     }
 })
 
-router.get("/admin/categories", (req,res) =>{                   //ROTA: /admin/categories
+router.get("/admin/categories", adminAuth,(req,res) =>{                   //ROTA: /admin/categories
     Category.findAll().then(categories =>{                      //ACHAR TODOS OS DADOS DO BANCO DE DADOS NO MODEL Category.js E PASSAR ESSAS INFORMAÇÕES PARA A VARIAVEL categories DENTRO DE THEN
         res.render("admin/categories/index",{                   //RENDERIZA A PAGINA index.ejs DA PASTA views/admin/categories
             categories: categories                              //PASSA OS DADOS DA categories PARA VARIAVEL cacetories, ESSA VARIAVEL POR SUA VÊZ VAI APARECER NA NOSSA VIEW (index.ejs)
@@ -32,7 +33,7 @@ router.get("/admin/categories", (req,res) =>{                   //ROTA: /admin/c
     })
 })
 
-router.post("/categories/delete", (req, res) =>{                    //ROTA:/categories/delete TIPO POST
+router.post("/categories/delete", adminAuth,(req, res) =>{                    //ROTA:/categories/delete TIPO POST
     var id = req.body.id;                                           //ESSE É A VARIAVEL QUE IRÁ RECEBER AS INFORMÇÕES DA ID DO FRONTEND PELO FORMULÁRIO //AQUI EU VOU RECEBER O id PELO FORMULARIO DO FRONTEND NA TAG <input name="id" ...> DO ARQ. index.ejs DA PASTA categories
     if(id != undefined){                                            //VERIFICAÇÃO DE ID SE É VALIDO (SE É DIFERENTE DE UNDEFINED)
         if(!isNaN(id)){                                             //VERIFICAÇÃO SE O ID É UM NUMERO (SE É DIFERENTE DE UM NÃO NUMERO)
@@ -52,7 +53,7 @@ router.post("/categories/delete", (req, res) =>{                    //ROTA:/cate
 })
 
 
-router.get("/admin/categories/edit/:id", (req, res) => {
+router.get("/admin/categories/edit/:id", adminAuth,(req, res) => {
     var id = req.params.id;                                         //VOU RECEBER UM ID QUE VAI VIR DOS PARAMETROS DA MINHA ROTA
     if(isNaN(id)){                                                  //CORREÇAO DO BUG DA ROTA
         res.redirect("/admin/categories")
@@ -70,7 +71,7 @@ router.get("/admin/categories/edit/:id", (req, res) => {
     })
 })
 
-router.post("/categories/update", (req, res) => {
+router.post("/categories/update", adminAuth,(req, res) => {
     var id = req.body.id;                                            //COMO VAMO-S RECEBER O ID ATRAVÉS DO FOMULÁRIO, NÓS VAMOS ACESSAR ATRAVÉS DO .body
     var title = req.body.title;                                      //AQUI TAMBÉM ESTAMOS RECEBENDO O TITULO ATRAVÉS DO FORMULÁRIO DO FRONTEND, POR ISSO UTILIZAREMOS O .body 
 

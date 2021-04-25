@@ -6,9 +6,20 @@ const categoriesController = require("./categories/CategoriesController")   //IM
 const articlesController = require("./articles/ArticlesController");        //IMPORTANDO O ArticlesController.js
 const Article = require("./articles/Article");                              //IMPORTANDO O Article.js
 const Category = require("./categories/Category");                          //IMPOTANDO O Category.js
+const usersConstroller = require("./users/UsersController");                //IMPOTANDO O UsersController.s
+const User = require("./users/User");                                       //IMPORTANTDO O User.js
+const session = require("express-session")                                  //BIBLIOTECA DE SESSÃO DE COOKIES
+
+
 
 //View engine
 app.set('view engine','ejs');                                          //VIEW ENGINE: EJS
+
+// Sessions
+app.use(session({
+    secret: "qualquercoisa",                                           //É UM CAMPO DE TEXTO ALEATORIO PARA AUMENTAR A SEGURANÇA DAS SESSÕES, COMO SE FOSSE UMA SENHA PARA DECRIPTAR SUAS SESSÕES, É ROCOMENDADO COLOCAR ALGO BEM ALEATORIO.( É UM TEXTO ALEATORIO QUE O EXPRESS SESSION PEDE PARA AUMENTAR A SEGURANÇA DAS SESSÕES, COMO SE FOSSE O SALT DO BCRYPT )
+    cookie: { maxAge: 30000},                                           //TEMPO EM QUE O COOKIE FICA SALVO NA MEMORIA.
+}))
 
 // Static
 app.use(express.static('public'));                                      //IRA LER/CARREGAR OS ARQUIVOS ESTÁTICOS DENTRO DA PASTA public
@@ -28,8 +39,11 @@ connection                                                              //OBJETO
         console.log("error");                                           //IRÁ APARECER: error
     })
 
+//DEFINIÇÃO DE UTILIZAÇÃO DE CONTROLLERS:
 app.use("/",categoriesController);                                      //ROTAS DO ARQUIVO ( CategoriesController.js )	
 app.use("/",articlesController);                                        //ROTAS DO ARQUIVO ( ArticlesController.js )	
+app.use("/",usersConstroller);                                          //ROTAS DO ARQUIVO ( UsersController.js )
+
 
 //PAGINA PRINCIPAL
 app.get("/", (req, res) => {                                            //ROTA PRINCIPAL
